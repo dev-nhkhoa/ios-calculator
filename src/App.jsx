@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { createContext } from "react";
 import { AppHeader, AppCalculator } from "./components";
 
 export const UserContext = createContext();
@@ -17,22 +17,5 @@ const App = () => {
 export default App;
 
 const AppProvider = ({ childern }) => {
-  const [answer, setAnswer] = useState(0);
-  const [floatNumber, setFloatNumber] = useState(false);
-  const [doMath, setDoMath] = useState();
-
-  return (
-    <UserContext.Provider
-      value={{
-        answer,
-        setAnswer,
-        doMath,
-        setDoMath,
-        floatNumber,
-        setFloatNumber,
-      }}
-    >
-      {childern}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider>{childern}</UserContext.Provider>;
 };
