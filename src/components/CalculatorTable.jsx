@@ -1,5 +1,11 @@
+import { RenderNumbers } from "./NumberButton";
+
 const CalculatorTable = () => {
-  return;
+  return (
+    <div>
+      <RenderNumbers />
+    </div>
+  );
 };
 
 export default CalculatorTable;
