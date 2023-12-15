@@ -1,8 +1,6 @@
 const CaclulatorScreen = ({ outputText }) => {
   return (
-    <div>
-      <h1>{outputText}</h1>
-    </div>
+    <h1 className="flex justify-end pt-[70px] text-[36px]">{outputText}</h1>
   );
 };
 
