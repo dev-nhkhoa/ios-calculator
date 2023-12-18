@@ -62,6 +62,11 @@ export const ButtonClicked = (value, setOutput, output) => {
   const handleMathOperator = (value) => {
     isFloat = false;
     if (operator !== undefined) {
+      if (operator !== value) {
+        operator = value;
+        isOperator = true;
+        return;
+      }
       lastOperator = operator;
       operator = undefined;
       secondParam = output;
@@ -166,3 +171,5 @@ export const ButtonClicked = (value, setOutput, output) => {
     return parseFloat(result).toString().length <= 12;
   }
 };
+
+export { operator };
