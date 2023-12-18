@@ -10,15 +10,20 @@ let isFloat = false;
 
 export const ButtonClicked = (value, setOutput, output) => {
   const calcResult = (a, b, operator) => {
+    let result;
     switch (operator) {
       case "+":
-        return parseFloat(a) + parseFloat(b);
+        result = parseFloat(a) + parseFloat(b);
+        return isValidResult(result) ? result : "!";
       case "-":
-        return parseFloat(a) - parseFloat(b);
+        result = parseFloat(a) - parseFloat(b);
+        return isValidResult(result) ? result : "!";
       case "*":
-        return parseFloat(a) * parseFloat(b);
+        result = parseFloat(a) * parseFloat(b);
+        return isValidResult(result) ? result : "!";
       case "/":
-        return parseFloat(a) / parseFloat(b);
+        result = parseFloat(a) / parseFloat(b);
+        return isValidResult(result) ? result : "!";
       default:
         return "NaN";
     }
@@ -109,7 +114,7 @@ export const ButtonClicked = (value, setOutput, output) => {
         if (isOperator) {
           isSecondParam = true;
         }
-        return `${pre}${value}`;
+        return isValidInputNumber(pre) ? `${pre}${value}` : pre;
       });
     }
     if (isSecondParam) {
@@ -117,7 +122,8 @@ export const ButtonClicked = (value, setOutput, output) => {
         if (pre === 0) {
           return value === 0 ? 0 : value;
         }
-        return `${pre}${value}`;
+
+        return isValidInputNumber(pre) ? `${pre}${value}` : pre;
       });
     }
     if (isOperator) {
@@ -125,7 +131,6 @@ export const ButtonClicked = (value, setOutput, output) => {
       isOperator = false;
     }
   };
-  //TODO: LIMIT 9 NUMBERS, FORMAT IT
   switch (value) {
     case ",":
       handleDecimalPoint();
@@ -151,5 +156,13 @@ export const ButtonClicked = (value, setOutput, output) => {
     default:
       handleNumber(value);
       break;
+  }
+
+  function isValidInputNumber(number) {
+    return parseFloat(number).toString().length < 12;
+  }
+
+  function isValidResult(result) {
+    return parseFloat(result).toString().length <= 12;
   }
 };
