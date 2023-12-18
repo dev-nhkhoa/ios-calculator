@@ -1,25 +1,36 @@
-import { memo, useContext } from "react";
+import { useContext } from "react";
 import { ButtonClicked } from "../lib/ButtonClicked";
 import { UserContext } from "./Calculator";
 
-const Button = ({ value, type }) => {
+export const NumberAndThingsButton = ({ number }) => {
   const { setOutput, output } = useContext(UserContext);
-  const bgColor = type === "math" ? "bg-[#FF9500]" : "bg-[#D4D4D2]";
   let width;
   width =
-    type === 0
-      ? "w-[138px] bg-[#D4D4D2] justify-start pl-4"
-      : "w-[64px] justify-center";
+    number === 0 ? "w-[138px] justify-start pl-4" : "w-[64px] justify-center";
   return (
     <button
       onClick={() => {
-        ButtonClicked(value, setOutput, output);
+        ButtonClicked(number, setOutput, output);
       }}
-      className={`${width} ${bgColor} flex h-[64px] items-center rounded-full text-[36px] font-medium text-white`}
+      className={`${width} flex h-[64px] items-center rounded-full bg-[#D4D4D2] text-[36px] font-medium text-white active:bg-gray-500`}
     >
-      <p>{value}</p>
+      <p>{number}</p>
     </button>
   );
 };
 
-export default memo(Button);
+export const MathsButtons = ({ math }) => {
+  const { setOutput, output } = useContext(UserContext);
+  return (
+    <button
+      onClick={() => {
+        ButtonClicked(math, setOutput, output);
+      }}
+      className={
+        "flex h-[64px] w-[64px] transform items-center justify-center rounded-full bg-[#FF9500] text-[36px] font-medium text-white transition duration-200 ease-in-out focus:border-blue-300 focus:bg-white focus:text-gray-500 focus:outline-none"
+      }
+    >
+      <p>{math}</p>
+    </button>
+  );
+};
