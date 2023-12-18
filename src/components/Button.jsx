@@ -1,10 +1,9 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import { ButtonClicked } from "../lib/ButtonClicked";
 import { UserContext } from "./Calculator";
 
 const Button = ({ value, type }) => {
-  console.log(value);
-  const { setOutput } = useContext(UserContext);
+  const { setOutput, output } = useContext(UserContext);
   const bgColor = type === "math" ? "bg-[#FF9500]" : "bg-[#D4D4D2]";
   let width;
   width =
@@ -14,8 +13,7 @@ const Button = ({ value, type }) => {
   return (
     <button
       onClick={() => {
-        ButtonClicked(value, setOutput);
-        console.log("test");
+        ButtonClicked(value, setOutput, output);
       }}
       className={`${width} ${bgColor} flex h-[64px] items-center rounded-full text-[36px] font-medium text-white`}
     >
@@ -24,4 +22,4 @@ const Button = ({ value, type }) => {
   );
 };
 
-export default Button;
+export default memo(Button);
